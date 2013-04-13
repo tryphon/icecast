@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<icestats>
+  <admin>icemaster@localhost</admin>
+  <client_connections>9484848</client_connections>
+  <clients>9</clients>
+  <connections>9512560</connections>
+  <file_connections>356</file_connections>
+  <host>stream.tryphon.eu</host>
+  <listener_connections>60236</listener_connections>
+  <listeners>5</listeners>
+  <location>RSpec</location>
+  <server_id>Icecast 2.3.2</server_id>
+  <server_start>Tue, 14 Feb 2012 17:45:48 +0100</server_start>
+  <source_client_connections>4356</source_client_connections>
+  <source_relay_connections>0</source_relay_connections>
+  <source_total_connections>4356</source_total_connections>
+  <sources>3</sources>
+  <stats>0</stats>
+  <stats_connections>0</stats_connections>
+  <source mount="/48FM.mp3">
+    <audio_info>
+    ice-samplerate=44100;ice-bitrate=192;ice-channels=2</audio_info>
+    <bitrate>192</bitrate>
+    <genre>Rock</genre>
+    <ice-bitrate>192</ice-bitrate>
+    <ice-channels>2</ice-channels>
+    <ice-samplerate>44100</ice-samplerate>
+    <listener_peak>9</listener_peak>
+    <listeners>4</listeners>
+    <listenurl>http://stream.tryphon.eu:8000/48FM.mp3</listenurl>
+    <max_listeners>40</max_listeners>
+    <public>1</public>
+    <server_description>48FM Liege</server_description>
+    <server_name>48fm</server_name>
+    <server_type>audio/mpeg</server_type>
+    <server_url>http://www.48fm.com/</server_url>
+    <slow_listeners>19</slow_listeners>
+    <source_ip>139.165.3.181</source_ip>
+    <stream_start>Sun, 22 Apr 2012 02:04:32 +0200</stream_start>
+    <title>48FM - Fair Play</title>
+    <total_bytes_read>840749000</total_bytes_read>
+    <total_bytes_sent>2866499355</total_bytes_sent>
+    <yp_currently_playing>48FM - Fair Play</yp_currently_playing>
+  </source>
+  <source mount="/live.mp3">
+    <audio_info>
+    ice-samplerate=44100;ice-bitrate=160;ice-channels=2</audio_info>
+    <bitrate>160</bitrate>
+    <genre>Rock</genre>
+    <ice-bitrate>160</ice-bitrate>
+    <ice-channels>2</ice-channels>
+    <ice-samplerate>44100</ice-samplerate>
+    <listener_peak>0</listener_peak>
+    <listeners>7</listeners>
+    <listenurl>http://stream.tryphon.eu:8000/live.mp3</listenurl>
+    <max_listeners>unlimited</max_listeners>
+    <public>1</public>
+    <server_description>This is my server
+    description</server_description>
+    <server_name>This is my server name</server_name>
+    <server_type>audio/mpeg</server_type>
+    <server_url>http://www.oddsock.org</server_url>
+    <slow_listeners>0</slow_listeners>
+    <source_ip>88.190.240.65</source_ip>
+    <stream_start>Sun, 22 Apr 2012 11:48:11 +0200</stream_start>
+    <total_bytes_read>204848</total_bytes_read>
+    <total_bytes_sent>0</total_bytes_sent>
+  </source>
+  <source mount="/live.ogg">
+    <audio_bitrate>88000</audio_bitrate>
+    <audio_channels>2</audio_channels>
+    <audio_info>
+    bitrate=88;channels=2;samplerate=44100;quality=1%2e5</audio_info>
+    <audio_samplerate>44100</audio_samplerate>
+    <bitrate>88</bitrate>
+    <channels>2</channels>
+    <genre>RockNRoll</genre>
+    <ice-bitrate>88</ice-bitrate>
+    <listener_peak>1</listener_peak>
+    <listeners>14</listeners>
+    <listenurl>http://stream.tryphon.eu:8000/live.ogg</listenurl>
+    <max_listeners>unlimited</max_listeners>
+    <public>0</public>
+    <quality>1.5</quality>
+    <samplerate>44100</samplerate>
+    <server_description>This is a stream
+    description</server_description>
+    <server_name>My Stream</server_name>
+    <server_type>application/ogg</server_type>
+    <server_url>http://www.oddsock.org</server_url>
+    <slow_listeners>0</slow_listeners>
+    <source_ip>172.20.4.6</source_ip>
+    <stream_start>Sun, 22 Apr 2012 11:47:50 +0200</stream_start>
+    <subtype>Vorbis</subtype>
+    <title>Pel de Noz - O Pindo</title>
+    <total_bytes_read>319501</total_bytes_read>
+    <total_bytes_sent>302645</total_bytes_sent>
+    <user_agent>libshout/2.2.2</user_agent>
+  </source>
+</icestats>
