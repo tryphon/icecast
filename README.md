@@ -1,6 +1,6 @@
-# Icecast
+# Icecast Ruby client
 
-TODO: Write a gem description
+Ruby client to access to Icecast XML API
 
 ## Installation
 
@@ -18,7 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    master = Icecast::Server.new :host => "stream.example.com, :admin_password => "secret"
+    
+    master.status.stream("mystream.mp3").listeners # => 47
+    master.status.stream("dummy.mp3").started? # => false
+    
+    slave = Icecast::Server.new :host => "stream2.example.com", :port => 80, :admin_password => "othersecret"
+    cluster = Icecast::Cluster.new(master, slave)
+    
+    cluster.status.stream("mystream.mp3").listeners
 
 ## Contributing
 

@@ -8,32 +8,22 @@ module Icecast
     attr_accessor :host, :port, :admin_password
 
     def initialize(attributes = {})
+      attributes = { :port => 8000 }.merge(attributes)
+
       attributes.each do |k,v|
         send "#{k}=", v
       end
     end
 
     def url_for(path)
-      "http://#{host}:8000/#{path}"
+      "http://#{host}:#{port}/#{path}"
     end
 
     def authentification
       { :username => 'admin', :password => admin_password }
     end
 
-    class NullCache
-
-      def fetch(*arguments, &block)
-        yield
-      end
-
-    end
-
-    def self.default_cache
-      defined?(Rails) ? Rails.cache : NullCache.new
-    end
-
-    @@cache = default_cache
+    @@cache = NullCache.new
     cattr_accessor :cache
 
     def xml_status

@@ -1,13 +1,19 @@
 require 'spec_helper'
 
 describe Icecast::Server do
-  
-  before(:each) do
-    FakeWeb.allow_net_connect = false
-  end
 
   let(:host) { "stream.tryphon.priv" }
   subject { Icecast::Server.new :host => host, :admin_password => "dummy" }
+
+  describe "#url_for" do
+    
+    it "should use host, port and given path" do
+      subject.host = "server"
+      subject.port = 123
+      subject.url_for("dummy").should == "http://server:123/dummy"
+    end
+
+  end
 
   describe "status" do
 
