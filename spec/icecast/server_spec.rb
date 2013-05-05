@@ -35,4 +35,24 @@ describe Icecast::Server do
 
   end
 
+  describe "#==" do
+
+    def other(attributes)
+      Icecast::Server.new attributes
+    end
+    
+    it "should be true if host and port are the same" do
+      subject.should == other(:host => subject.host, :port => subject.port)
+    end
+
+    it "should be false if host is different" do
+      subject.should_not == other(:host => "otherhost", :port => subject.port)
+    end
+
+    it "should be false if port is different" do
+      subject.should_not == other(:host => subject.host, :port => subject.port + 1)
+    end
+
+  end
+
 end

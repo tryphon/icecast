@@ -15,6 +15,10 @@ module Icecast
       end
     end
 
+    def ==(other)
+      other and host == other.host and port == other.port
+    end
+
     def url_for(path)
       "http://#{host}:#{port}/#{path}"
     end
