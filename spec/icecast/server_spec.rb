@@ -35,6 +35,14 @@ describe Icecast::Server do
 
   end
 
+  describe "#cache_key" do
+    
+    it "should use host and port" do
+      subject.cache_key.should == "stream.tryphon.priv_8000"
+    end
+
+  end
+
   describe "#==" do
 
     def other(attributes)

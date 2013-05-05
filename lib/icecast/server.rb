@@ -31,10 +31,14 @@ module Icecast
     cattr_accessor :cache
 
     def xml_status
-      cache.fetch("Icecast::Status::#{host}_#{port}", :expires_in => 60, :race_condition_ttl => 5) do
+      cache.fetch("Icecast::Status::#{cache_key}", :expires_in => 60, :race_condition_ttl => 5) do
         Icecast.logger.info "Retrieve Icecast status from #{host}"
         self.class.get url_for("admin/stats"), :basic_auth => authentification
       end
+    end
+
+    def cache_key
+      "#{host}_#{port}"
     end
 
     def status

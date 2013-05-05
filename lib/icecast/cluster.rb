@@ -7,11 +7,26 @@ module Icecast
       @servers = servers.flatten
     end
 
+    def ==(other)
+      other and servers == other.servers
+    end
+
     @@cache = NullCache.new
     cattr_accessor :cache
 
     def status
       Status.new servers.map(&:status)
+    end
+
+    def status
+      cache.fetch("Icecast::Cluster::Status::#{cache_key}", :expires_in => 60, :race_condition_ttl => 5) do
+        Icecast.logger.info "Retrieve Icecast cluster status"
+        Status.new servers.map(&:status)
+      end
+    end
+
+    def cache_key
+      servers.map(&:cache_key).sort.join('+')
     end
 
     class Status
