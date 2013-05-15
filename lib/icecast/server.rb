@@ -33,7 +33,7 @@ module Icecast
     def xml_status
       cache.fetch("Icecast::Status::#{cache_key}", :expires_in => 60, :race_condition_ttl => 5) do
         Icecast.logger.info "Retrieve Icecast status from #{host}"
-        self.class.get url_for("admin/stats"), :basic_auth => authentification
+        self.class.get(url_for("admin/stats"), :basic_auth => authentification).parsed_response
       end
     end
 
@@ -49,6 +49,7 @@ module Icecast
       status! 
     rescue Exception => e
       Icecast.logger.error "Can't retrieve status on #{host} : #{e}"
+      nil
     end
 
     class Status
