@@ -16,6 +16,20 @@ describe Icecast::Server do
   end
 
   describe "status" do
+    
+    it "should return status! result" do
+      subject.stub :status! => "dummy"
+      subject.status.should == subject.status!
+    end
+
+    it "should return nil if status! fails" do
+      subject.stub(:status!).and_raise(Exception)
+      subject.status.should be_nil
+    end
+
+  end
+
+  describe "status!" do
 
     let(:stats_body) { IO.read "spec/fixtures/icecast_admin_stats.xml" }
 
@@ -24,13 +38,13 @@ describe Icecast::Server do
     end
     
     it "should use xml information retrieved in admin/stats" do
-      subject.status.location.should == "RSpec"
+      subject.status!.location.should == "RSpec"
     end
 
     it "should find stream statuses for each mount point" do
-      subject.status.stream("48FM.mp3").listeners.should == 4
-      subject.status.stream("live.mp3").listeners.should == 7
-      subject.status.stream("live.ogg").listeners.should == 14
+      subject.status!.stream("48FM.mp3").listeners.should == 4
+      subject.status!.stream("live.mp3").listeners.should == 7
+      subject.status!.stream("live.ogg").listeners.should == 14
     end
 
   end

@@ -41,8 +41,14 @@ module Icecast
       "#{host}_#{port}"
     end
 
-    def status
+    def status!
       Status.new xml_status
+    end
+
+    def status
+      status! 
+    rescue Exception => e
+      Icecast.logger.error "Can't retrieve status on #{host} : #{e}"
     end
 
     class Status

@@ -1,6 +1,7 @@
 require "icecast/version"
 
 require "null_logger"
+require "parallel"
 require "active_support/core_ext/module/attribute_accessors"
 require "active_support/core_ext/class/attribute_accessors"
 require "active_support/core_ext/object/blank"

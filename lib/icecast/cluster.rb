@@ -14,16 +14,21 @@ module Icecast
     @@cache = NullCache.new
     cattr_accessor :cache
 
-    def status
-      Status.new servers.map(&:status)
+    def status_without_cache
+      Status.new server_statuses
     end
 
-    def status
+    def server_statuses
+      Parallel.map(servers, :in_threads => 4, &:status).compact
+    end
+
+    def status_with_cache
       cache.fetch("Icecast::Cluster::Status::#{cache_key}", :expires_in => 60, :race_condition_ttl => 5) do
         Icecast.logger.info "Retrieve Icecast cluster status"
-        Status.new servers.map(&:status)
+        status_without_cache
       end
     end
+    alias_method :status, :status_with_cache
 
     def cache_key
       servers.map(&:cache_key).sort.join('+')

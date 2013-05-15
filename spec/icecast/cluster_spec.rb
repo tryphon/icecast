@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Icecast::Cluster do
 
-  let(:master_server) { mock :status => mock, :cache_key => "first" }
-  let(:slave_server) { mock :status => mock, :cache_key => "second" }
+  let(:master_server) { mock "first server", :status => mock("first status"), :cache_key => "first" }
+  let(:slave_server) { mock "second server", :status => mock("second status"), :cache_key => "second" }
 
   subject { Icecast::Cluster.new master_server, slave_server }
 
