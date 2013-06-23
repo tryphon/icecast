@@ -43,6 +43,17 @@ describe Icecast::Log::Line do
 
   end
 
+  describe "#started_at" do
+
+    it "should should ended_at and duration" do
+      subject.ended_at = Time.now
+      subject.duration = 300
+
+      subject.started_at.should == subject.ended_at - subject.duration
+    end
+
+  end
+
   describe ".parse" do
 
     context "a standard line" do
@@ -59,8 +70,8 @@ describe Icecast::Log::Line do
 
       its(:username) { should be_nil }
 
-      it "should read started_at time" do
-        subject.started_at.should == Time.parse("22/Jun/2013 09:40:57 +0200")
+      it "should read ended_at time" do
+        subject.ended_at.should == Time.parse("22/Jun/2013 09:40:57 +0200")
       end
 
       it "should read method" do

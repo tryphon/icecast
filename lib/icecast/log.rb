@@ -49,7 +49,7 @@ module Icecast
 
       attribute :remote_ip, String
       attribute :username, String
-      attribute :started_at, Time, :writer_class => TimeWriter
+      attribute :ended_at, Time, :writer_class => TimeWriter
       attribute :path, String
       attribute :method, String
       attribute :query, Hash, :writer_class => QueryWriter
@@ -79,12 +79,15 @@ module Icecast
         @path = path
       end
 
+      def started_at
+        ended_at - duration if ended_at and duration
+      end
 
       def self.parse(line)
         line = fix_encoding line
 
         if line =~ %r{^([0-9\.]+) - ([^ ]+) \[([^\]]+)\] "(GET|HEAD|SOURCE) ([^ ]+) (HTTP|ICE)/1.[01x]" ([0-9]+) ([0-9]+) "([^"]+)" "([^"]+)" ([0-9]+)$}
-          new :remote_ip => $1, :username => $2, :started_at => $3, :method => $4, :path => $5, :status_code => $7, :size => $8, :referer => $9, :user_agent => $10, :duration => $11
+          new :remote_ip => $1, :username => $2, :ended_at => $3, :method => $4, :path => $5, :status_code => $7, :size => $8, :referer => $9, :user_agent => $10, :duration => $11
         end
       end
 
