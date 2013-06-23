@@ -1,0 +1,4 @@
+12.2.11.9 - admin [22/Jun/2013:09:37:40 +0200] "GET /admin/stats HTTP/1.1" 200 7098 "-" "-" 0
+78.115.170.50 - - [22/Jun/2013:09:39:19 +0200] "GET /stream1.mp3 HTTP/1.0" 200 70285 "-" "NSPlayer/10.0.0.3702 WMFSDK/10.0" 1
+invalid line
+217.27.72.12 - - [22/Jun/2013:09:40:57 +0200] "GET /stream2.mp3 HTTP/1.1" 200 188077545 "-" "iTunes/11.0.4 (Windows; Microsoft Windows XP Home Edition Service Pack 3 (Build 2600)) AppleWebKit/536.30.1" 9705

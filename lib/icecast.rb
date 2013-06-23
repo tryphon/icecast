@@ -2,6 +2,7 @@ require "icecast/version"
 
 require "null_logger"
 require "parallel"
+require "virtus"
 require "active_support/core_ext/module/attribute_accessors"
 require "active_support/core_ext/class/attribute_accessors"
 require "active_support/core_ext/object/blank"
@@ -15,3 +16,4 @@ end
 require 'icecast/null_cache'
 require 'icecast/server'
 require 'icecast/cluster'
+require 'icecast/log'
