@@ -49,7 +49,7 @@ module Icecast
     end
 
     class Line
-      include Virtus
+      include Virtus.model
 
       attribute :remote_ip, String
       attribute :username, String
