@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'activesupport'
   spec.add_runtime_dependency 'null_logger'
   spec.add_runtime_dependency 'parallel'
-  spec.add_runtime_dependency 'virtus'
+  spec.add_runtime_dependency 'virtus', '~> 1.0.0'
 
   spec.add_development_dependency "bundler", "~> 1.3"
 
