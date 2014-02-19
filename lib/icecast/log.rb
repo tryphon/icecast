@@ -1,5 +1,3 @@
-require 'iconv'
-
 class Time
   # Requires for Ruby 1.8
   def self.strptime(date, format, now=self.now)
@@ -16,31 +14,37 @@ class Time
 end
 
 module Icecast
+
   class Log
 
-    attr_accessor :file
+    attr_accessor :file, :seek
 
     def initialize(file)
       @file = file
     end
 
+    include Enumerable
+
     def each(&block)
-      File.open(file, "r").each_line do |line|
-        if log_line = Line.parse(line)
-          yield log_line
+      File.open(file, "r") do |f|
+        f.seek seek, IO::SEEK_SET if seek
+        f.each_line do |line|
+          if log_line = Line.parse(line)
+            yield log_line
+          end
         end
       end
     end
 
-    class TimeWriter < Virtus::Attribute::Writer::Coercible
+    class Time < Virtus::Attribute
       def coerce(value)
-        (value.nil? or value.is_a?(Time)) ? value : Time.strptime(value, "%d/%b/%Y:%H:%M:%S %z")
+        (value.nil? or value.is_a?(::Time)) ? value : ::Time.strptime(value, "%d/%b/%Y:%H:%M:%S %z")
       end
     end
 
-    class QueryWriter < Virtus::Attribute::Writer::Coercible
+    class Query < Virtus::Attribute
       def coerce(value)
-        (value.nil? or value.is_a?(Hash)) ? value : CGI::parse(value)
+        (value.nil? or value.is_a?(::Hash)) ? value : CGI::parse(value)
       end
     end
 
@@ -49,10 +53,10 @@ module Icecast
 
       attribute :remote_ip, String
       attribute :username, String
-      attribute :ended_at, Time, :writer_class => TimeWriter
+      attribute :ended_at, Time
       attribute :path, String
       attribute :method, String
-      attribute :query, Hash, :writer_class => QueryWriter
+      attribute :query, Query
       attribute :status_code, Integer
       attribute :size, Integer
       attribute :referer, String
@@ -60,7 +64,12 @@ module Icecast
       attribute :duration, Integer
 
       def self.fix_encoding(line)
-        ::Iconv.conv 'UTF-8//IGNORE', 'UTF-8', line
+        if line.respond_to?(:encode)
+          line.encode("UTF-8", :invalid => :replace, :undef => :replace, :replace => "?")
+        else
+          require 'iconv'
+          ::Iconv.conv 'UTF-8//IGNORE', 'UTF-8', line
+        end
       end
 
       def username=(username)
@@ -69,6 +78,10 @@ module Icecast
 
       def referer=(referer)
         @referer = (referer == "-" ? nil : referer)
+      end
+
+      def user_agent=(user_agent)
+        @user_agent = (user_agent == "-" ? nil : user_agent)
       end
 
       def path=(path)
