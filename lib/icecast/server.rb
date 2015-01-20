@@ -4,7 +4,7 @@ module Icecast
   class Server
     include HTTParty
     format :xml
-    
+
     attr_accessor :host, :port, :admin_password
 
     def initialize(attributes = {})
@@ -46,7 +46,7 @@ module Icecast
     end
 
     def status
-      status! 
+      status!
     rescue Exception => e
       Icecast.logger.error "Can't retrieve status on #{host} : #{e}"
       nil
@@ -67,9 +67,13 @@ module Icecast
         Hash === sources ? [sources] : Array(sources)
       end
 
+      def listeners
+        parsed_status["icestats"]["listeners"].to_i
+      end
+
       def stream(mount_point)
         mount_point = "/#{mount_point}" unless mount_point.start_with?("/")
-        @stream_statuses[mount_point] ||= 
+        @stream_statuses[mount_point] ||=
           begin
             parsed_source_status = parsed_source_statuses.find { |s| s["mount"] == mount_point }
             StreamStatus.new(parsed_source_status)
@@ -97,7 +101,7 @@ module Icecast
       def listeners
         started? ? parsed_status["listeners"].to_i : 0
       end
-      
+
     end
 
   end
